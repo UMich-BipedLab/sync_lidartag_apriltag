@@ -17,11 +17,12 @@ public:
 	CamLidarSync():
 	private_nh_("~"){
 		//intilaization
-    	image_sub.subscribe(nh_, "/camera/color/image_raw", 10);
-    	pointcloud_sub.subscribe(nh_, "/velodyne_points", 10);
+		CamLidarSync::GetParam();
+		
+    	image_sub.subscribe(nh_, image_topic, 10);
+    	pointcloud_sub.subscribe(nh_, pointcloud_topic, 10);
 
 		sync_policy = new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), image_sub, pointcloud_sub);
-    	// sync_policy_.connectInput(image_sub,pointcloud_sub);
     	sync_policy->registerCallback(boost::bind(&CamLidarSync::callback, this, _1, _2));	
 	}
 
@@ -33,9 +34,17 @@ public:
 	}
 
 private:
+	void GetParam(){
+		private_nh_.param("pointcloud_topic", pointcloud_topic, pointcloud_topic);
+  		private_nh_.param("image_topic", image_topic, image_topic);
+  		private_nh_.param("sync_pointcloud_topic", sync_pointcloud_topic, sync_pointcloud_topic);
+  		private_nh_.param("sync_image_topic", sync_image_topic, sync_image_topic);
+	}
+
+
 	void Init(){
-		image_pub = nh_.advertise<sensor_msgs::Image>("/camera/color/image_sync",10);
-    	pointcloud_pub = nh_.advertise<sensor_msgs::PointCloud2>("/velodyne_points_sync",10);
+		image_pub = nh_.advertise<sensor_msgs::Image>(sync_image_topic,10);
+    	pointcloud_pub = nh_.advertise<sensor_msgs::PointCloud2>(sync_pointcloud_topic,10);
 	}
 
 	void callback(const sensor_msgs::Image::ConstPtr& image, 
@@ -52,6 +61,12 @@ private:
 	typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, 
 														    sensor_msgs::PointCloud2> SyncPolicy;
 	message_filters::Synchronizer<SyncPolicy> *sync_policy;
+
+	//parameters
+	std::string pointcloud_topic;
+	std::string image_topic;
+	std::string sync_pointcloud_topic;
+	std::string sync_image_topic; 
 };
 
 int main(int argc, char **argv){
