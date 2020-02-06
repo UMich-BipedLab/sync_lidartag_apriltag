@@ -1,17 +1,30 @@
 <launch>
 
-  <arg name="synched_pointcloud_topic" default="/velodyne_points_sync"/>
-  <arg name="synched_image_topic" default="/camera/color/image_sync"/>
+  <arg name="synced_pointcloud_topic" default="/sync_cam_lidar/velodyne_points_sync"/>
+  <arg name="synced_image_topic" default="/sync_cam_lidar/image_sync"/>
+  <!-- <arg name="synced_camerainfo_topic" default="/sync_cam_lidar/camera_info_sync"/> -->
 
   <node pkg="sync_cam_lidar" name="sync_cam_lidar" type="sync_cam_lidar_node" output="screen">
     
     <param name="pointcloud_topic" type="string" value="/velodyne_points" /> 
     <param name="image_topic" type="string" value="/camera/color/image_raw" />
 
-    <param name="sync_pointcloud_topic" type="string" value="$(arg synched_pointcloud_topic)" /> 
-    <param name="sync_image_topic" type="string" value="$(arg synched_image_topic)" />  
+    <param name="sync_pointcloud_topic" type="string" value="$(arg synced_pointcloud_topic)" /> 
+    <param name="sync_image_topic" type="string" value="$(arg synced_image_topic)" /> 
+
   </node>
   
+<!--   <node pkg="sync_cam_lidar" name= "detection_align_node" type = "detection_align_node" output = "screen">
+    <param name="apriltag_detection_topic" type="string" value= "/apriltag2_tag_detections_array"/> 
+    <param name="image_topic" type="string" value="$(arg synced_image_topic)"/>
+    <param name="lidartag_detection_topic" type="string" value="/lidartag_msgs/LiDARTagDetectionArray" />
+
+    <param name="align_apriltag_detection_topic" type="string" value= "apriltag2_tag_detections_array_align"/> 
+    <param name="align_image_topic" type="string" value="/camera/color/image_align" /> 
+    <param name="align_lidartag_detection_topic" type="string" value= "LiDARTagDetectionArrayAlign"/>
+
+  </node> -->
+
   <group ns="LiDARTag">
         <!-- valgrind /-/-tool=callgrind /-/-callgrind-out-file='callgrind.lidar_tag.%p'  -->
         <node pkg="lidar_tag" launch-prefix="" type="lidar_tag_main" name="lidar_tag" output="screen" />
@@ -43,8 +56,9 @@
 
 
             <!--  LiDAR system  -->
-            <param name="pointcloud_topic" type="string" value="$(arg synched_pointcloud_topic)" /> 
-            <param name="camera_topic" type="string" value="$(arg synched_image_topic)" /> 
+            <param name="pointcloud_topic" type="string" value="$(arg synced_pointcloud_topic)" /> 
+            <param name="camera_topic" type="string" value="$(arg synced_image_topic)" /> 
+            <!-- <param name="lidartag_detection_topic" value="/lidartag_msgs/LiDARTagDetectionArray"/> -->
             <param name="beam_number" type="int" value="32" /> 
             <param name="vertical_fov" type="int" value="40" /> 
 
@@ -89,8 +103,9 @@
     </group>
 
     <node pkg="apriltag2ROS" name="apriltag2ROS" type="apriltag2_pub" output="screen">
-        <param name="camera_info_topic" type="string" value="/camera/color/camera_info" /> 
-        <param name="image_topic" type="string" value="$(arg synched_image_topic)" />
+        <param name="image_topic" type="string" value="$(arg synced_image_topic)" />
+        <param name="detection_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detection" />
+        <param name="detection_array_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detections_array" /> 
     </node>
 
 </launch>

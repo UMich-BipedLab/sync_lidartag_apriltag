@@ -7,6 +7,7 @@
 #include <std_msgs/String.h>
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/CameraInfo.h>
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/synchronizer.h>
@@ -21,9 +22,8 @@ public:
 		
     	image_sub.subscribe(nh_, image_topic, 10);
     	pointcloud_sub.subscribe(nh_, pointcloud_topic, 10);
-
 		sync_policy = new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), image_sub, pointcloud_sub);
-    	sync_policy->registerCallback(boost::bind(&CamLidarSync::callback, this, _1, _2));	
+    	sync_policy->registerCallback(boost::bind(&CamLidarSync::callback, this, _1, _2));
 	}
 
 	~CamLidarSync(){}; 
@@ -52,21 +52,22 @@ private:
 		image_pub.publish(*image);
 		pointcloud_pub.publish(*point_cloud);
 	}
+
+
 private:
 	ros::NodeHandle nh_, private_nh_;
 	ros::Publisher image_pub;
 	ros::Publisher pointcloud_pub;
-	message_filters::Subscriber<sensor_msgs::Image> image_sub;
+	message_filters::Subscriber<sensor_msgs::Image>  image_sub;
 	message_filters::Subscriber<sensor_msgs::PointCloud2> pointcloud_sub;
 	typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, 
 														    sensor_msgs::PointCloud2> SyncPolicy;
 	message_filters::Synchronizer<SyncPolicy> *sync_policy;
-
 	//parameters
 	std::string pointcloud_topic;
 	std::string image_topic;
 	std::string sync_pointcloud_topic;
-	std::string sync_image_topic; 
+	std::string sync_image_topic;
 };
 
 int main(int argc, char **argv){
