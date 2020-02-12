@@ -58,7 +58,7 @@
             <!--  LiDAR system  -->
             <param name="pointcloud_topic" type="string" value="$(arg synced_pointcloud_topic)" /> 
             <param name="camera_topic" type="string" value="$(arg synced_image_topic)" /> 
-            <!-- <param name="lidartag_detection_topic" value="/lidartag_msgs/LiDARTagDetectionArray"/> -->
+            <param name="lidartag_detection_topic" value="/LiDARTag/lidar_tag/LiDARTagDetectionArray"/>
             <param name="beam_number" type="int" value="32" /> 
             <param name="vertical_fov" type="int" value="40" /> 
 
@@ -99,13 +99,14 @@
             <param name="fill_in_max_points_threshold" type="int" value="4500" /> 
             <param name="line_intensity_bound" type="double" value="1000" /> 
 
-
     </group>
 
     <node pkg="apriltag2ROS" name="apriltag2ROS" type="apriltag2_pub" output="screen">
         <param name="image_topic" type="string" value="$(arg synced_image_topic)" />
         <param name="detection_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detection" />
         <param name="detection_array_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detections_array" /> 
+        <param name="blur_percent" type="string" value ="0.0" />
+        
     </node>
 
 </launch>

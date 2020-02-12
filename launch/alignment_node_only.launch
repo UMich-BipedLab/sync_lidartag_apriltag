@@ -2,7 +2,7 @@
   <node pkg="sync_cam_lidar" name= "detection_align_node" type = "detection_align_node" output = "screen">
     <param name="apriltag_detection_topic" type="string" value= "/apriltag2ROS/apriltag2_tag_detections_array"/> 
     <param name="image_topic" type="string" value="/sync_cam_lidar/image_sync"/>
-    <param name="lidartag_detection_topic" type="string" value="/LiDARTag/lidar_tag/LiDARTagPose" />
+    <param name="lidartag_detection_topic" type="string" value="/LiDARTag/lidar_tag/LiDARTagDetectionArray" />
 
     <param name="align_apriltag_detection_topic" type="string" value= "/detection_align/apriltag_detections_align"/> 
     <param name="align_image_topic" type="string" value="/detection_align/image_align" /> 

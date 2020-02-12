@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <queue>
-#include <deque>
+#include <map>
 #include <ros/ros.h>
 
 #include <rosbag/bag.h>
@@ -182,34 +182,40 @@ private:
     void publishAlignedMsg(sensor_msgs::Image::ConstPtr img_ptr,
 						   apriltag_msgs::AprilTagDetectionArray::ConstPtr apriltag_ptr,
 						   lidartag_msgs::LiDARTagDetectionArray::ConstPtr lidartag_ptr){
+    	
     	alignment_msgs::TagDetectionAlignmentArray aligned_detections;
     	aligned_detections.header = msg_header;
     	aligned_detections.frame_index = apriltag_ptr->frame_index;
-    	int size = std::max(apriltag_ptr->detections.size(), lidartag_ptr->detections.size());
-    	for (int i = 1; i <= size; ++i){
-    		alignment_msgs::TagDetectionAlignment detection;
-    		aligned_detections.header = msg_header;
-    		aligned_detections.frame_index = apriltag_ptr->frame_index;
-    		detection.image = *img_ptr;
+    	
+    	std::map<int, lidartag_msgs::LiDARTagDetection> lidarmap;
+    	std::map<int, apriltag_msgs::AprilTagDetection> aprilmap;
 
-    		int found = -1;
-    		for(const auto &tag : apriltag_ptr->detections){
-    			if(tag.id == i){
-    				detection.apriltag_detection = tag;
-    				found++;
-    				break;
-    			} 
-    		}
-    		for(const auto &tag : lidartag_ptr->detections){
-    			if(tag.id == i){
-    				detection.lidartag_detection = tag;
-    				found++;
-    				break;
-    			} 
-    		}
-
-    		if(found > 0) aligned_detections.detections.push_back(detection);
+    	for(const auto &tag : lidartag_ptr->detections){
+    		if(lidarmap.count(tag.id)) lidarmap.erase(tag.id);
+    		else lidarmap[tag.id] = tag;
     	}
+    	
+
+    	for(const auto &tag : apriltag_ptr->detections){
+    		if(aprilmap.count(tag.id)) aprilmap.erase(tag.id);
+    		else aprilmap[tag.id] = tag;
+    	}
+
+    	int count =0;
+    	for(const auto &iter : lidarmap){
+    		int id = iter.first;
+    		if (aprilmap.count(id)){
+    	    	alignment_msgs::TagDetectionAlignment detection;
+	    		detection.header = msg_header;
+	    		detection.frame_index = apriltag_ptr->frame_index;
+	    		detection.image = *img_ptr;
+    			detection.apriltag_detection = aprilmap[id];
+    			detection.lidartag_detection = iter.second;
+	    		aligned_detections.detections.push_back(detection);
+    		}
+
+    	}
+    	std::cout << "tag alignment message size: " << aligned_detections.detections.size() <<std::endl;
     	alignment_msgs_pub.publish(aligned_detections);
     }
 
