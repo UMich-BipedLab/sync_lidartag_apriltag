@@ -1,0 +1,5 @@
+std_msgs/Header header
+int64 frame_index
+sensor_msgs/Image image
+apriltag_msgs/AprilTagDetection apriltag_detection
+lidartag_msgs/LiDARTagDetection lidartag_detection
