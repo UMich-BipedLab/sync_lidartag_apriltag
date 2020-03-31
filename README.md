@@ -3,8 +3,8 @@
 ## Overview
 This is a synchronization package for [LiDARTags](https://github.com/UMich-BipedLab/LiDARTag) and [AprilTags](https://github.com/UMich-BipedLab/AprilTag_ROS). As the LiDAR and camera data streams arrive, they are synchronized (synchronization node), examined for fiducial markers (LiDARTags and AprilTags), and checked for false positives (tag-pairing node). The relevant information is saved as ROS bagfiles from _alignment_msgs_ for post-processing in another [package](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration). For LiDAR-Camera extrinsic calibration, we use target vertices and image corners as our features. 
 
-**Author: Bruce JK Huang
-Maintainer: Bruce JK Huang, bjhuang@umich.edu  
+**Author: Bruce JK Huang  
+Maintainer: Bruce JK Huang, bjhuang@umich.edu    
 Affiliation: The Biped Lab, the University of Michigan**
 
 This package has been tested under MATLAB2019a and Ubuntu 16.04.
