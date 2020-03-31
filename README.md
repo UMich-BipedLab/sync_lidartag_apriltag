@@ -24,6 +24,6 @@ The _sync_node_only_ launch file will only run the data synchronization node, wh
 
 
 ## Usage for automatic calibration
-To compete the fron-end of the pipeline of the automatic calibration, the
+To compete the fron-end of the pipeline of the [automatic calibration](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration), the
 _sync_cam_lidar_ launch file should be ran first, and then run the
 _alignment_node_only_ launch file to run the tag pairing node. 
