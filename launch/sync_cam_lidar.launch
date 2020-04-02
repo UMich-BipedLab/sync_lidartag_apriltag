@@ -132,7 +132,7 @@
 
     </group>
 
-    <node pkg="apriltag2ROS" name="apriltag2ROS" type="apriltag2_pub" output="screen">
+    <node pkg="apriltag3ROS" name="apriltag3ROS" type="apriltag3_pub" output="screen">
         <param name="image_topic" type="string" value="$(arg synced_image_topic)" />
         <param name="detection_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detection" />
         <param name="detection_array_topic" type="string" value="/apriltag2ROS/apriltag2_tag_detections_array" /> 
