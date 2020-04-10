@@ -3,9 +3,9 @@
 ## Overview
 This is a synchronization package for [LiDARTags](https://github.com/UMich-BipedLab/LiDARTag) and [AprilTags](https://github.com/UMich-BipedLab/AprilTag_ROS). As the LiDAR and camera data streams arrive, they are synchronized (synchronization node), examined for fiducial markers (LiDARTags and AprilTags), and checked for false positives (tag-pairing node). The relevant information is saved as ROS bagfiles from _alignment_msgs_ for post-processing in another [package](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration). For LiDAR-Camera extrinsic calibration, we use target vertices and image corners as our features. 
 
-**Author: Bruce JK Huang  
-Maintainer: Bruce JK Huang, bjhuang@umich.edu    
-Affiliation: The Biped Lab, the University of Michigan**
+* Authors: Bruce JK Huang, Chenxi Feng
+* Maintainer: [Bruce JK Huang](https://www.brucerobot.com/), brucejkh[at]gmail.com
+* Affiliation: [The Biped Lab](https://www.biped.solutions/), the University of Michigan
 
 This package has been tested under MATLAB2019a and Ubuntu 16.04.
 
@@ -40,3 +40,35 @@ This package contains three launch files.
 ## Usage for automatic calibration
 To compete the fron-end of the pipeline of the [automatic calibration](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration), the _sync_cam_lidar_ launch file should be ran first, and then run the _alignment_node_only_ launch file to run the tag pairing node. 
 
+## Citations
+1. Jiunn-Kai Huang, Chenxi Feng, Madhav Achar, Maani Ghaffari, and Jessy W. Grizzle, "3D LiDAR Intrinsic Calibration and Automatic System for LiDAR to Camera Calibration" ([PDF](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration/blob/release_v1/AutomaticCalibration.pdf))(arXiv will appear soon))
+<!--
+```
+@article{huang2019improvements,
+  title={Improvements to Target-Based 3D LiDAR to Camera Calibration},
+  author={Huang, Jiunn-Kai and Grizzle, Jessy W},
+  journal={arXiv preprint arXiv:1910.03126},
+  year={2019}
+}
+```
+-->
+2. Jiunn-Kai Huang and J. Grizzle, "Improvements to Target-Based 3D LiDAR to Camera Calibration" ([PDF](https://github.com/UMich-BipedLab/extrinsic_lidar_camera_calibration/blob/master/LiDAR2CameraCalibration.pdf))([arXiv](https://arxiv.org/abs/1910.03126))
+```
+@article{huang2019improvements,
+  title={Improvements to Target-Based 3D LiDAR to Camera Calibration},
+  author={Huang, Jiunn-Kai and Grizzle, Jessy W},
+  journal={arXiv preprint arXiv:1910.03126},
+  year={2019}
+}
+```
+3. Jiunn-Kai Huang, Maani Ghaffari, Ross Hartley, Lu Gan, Ryan M. Eustice,
+and Jessy W. Grizzle, "LiDARTag: A Real-Time Fiducial Tag using
+Point Clouds" ([PDF](https://github.com/UMich-BipedLab/LiDARTag/blob/release_v0/LiDARTag.pdf))([arXiv](https://arxiv.org/abs/1908.10349))
+```
+@article{huang2019lidartag,
+  title={LiDARTag: A Real-Time Fiducial Tag using Point Clouds},
+  author={Huang, Jiunn-Kai and Ghaffari, Maani and Hartley, Ross and Gan, Lu and Eustice, Ryan M and Grizzle, Jessy W},
+  journal={arXiv preprint arXiv:1908.10349},
+  year={2019}
+}
+```
