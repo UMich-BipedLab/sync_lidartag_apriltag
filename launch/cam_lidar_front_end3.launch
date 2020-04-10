@@ -30,19 +30,9 @@
 -->
 
 <launch>
-  <arg name="synched_pointcloud_topic" default="/velodyne_points_sync"/>
-    <arg name="synched_image_topic" default="/camera/color/image_sync"/>
-    <arg name="synched_camerainfo_topic" default="/camera/color/camera_info_sync"/>
+  <include file="$(find sync_cam_lidar)/launch/sync_node.launch"/>
+  <include file="$(find apriltag3_ros)/launch/apriltag3_ros.launch"/>
+  <include file="$(find lidartag)/launch/LiDARTag.launch"/>
+  <include file="$(find sync_cam_lidar)/launch/alignment_node3.launch"/>
 
-  <node pkg="sync_cam_lidar" name="sync_cam_lidar" type="sync_cam_lidar_node" output="screen">
-    
-    <param name="pointcloud_topic" type="string" value="/velodyne_points" /> 
-    <param name="image_topic" type="string" value="/camera/color/image_raw" />
-    <param name="camera_info_topic" type="string" value="/camera/color/camera_info" />
-
-    <param name="sync_pointcloud_topic" type="string" value="$(arg synched_pointcloud_topic)" /> 
-    <param name="sync_image_topic" type="string" value="$(arg synched_image_topic)" /> 
-    <param name="sync_camera_info_topic" type="string" value="$(arg synched_camerainfo_topic)" />
-
-  </node> 
 </launch>

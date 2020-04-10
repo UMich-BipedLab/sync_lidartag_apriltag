@@ -30,14 +30,9 @@
 -->
 
 <launch>
-  <node pkg="sync_cam_lidar" name= "detection_align_node" type = "detection_align_node" output = "screen">
-    <param name="apriltag_detection_topic" type="string" value= "/apriltag2ROS/apriltag2_tag_detections_array"/> 
-    <param name="image_topic" type="string" value="/sync_cam_lidar/image_sync"/>
-    <param name="lidartag_detection_topic" type="string" value="/LiDARTag/lidar_tag/LiDARTagDetectionArray" />
+  <include file="$(find sync_cam_lidar)/launch/sync_node.launch"/>
+  <include file="$(find apriltag2_ros)/launch/apriltag2_ros.launch"/>
+  <include file="$(find lidartag)/launch/LiDARTag.launch"/>
+  <include file="$(find sync_cam_lidar)/launch/alignment_node2.launch"/>
 
-    <param name="align_apriltag_detection_topic" type="string" value= "/detection_align/apriltag_detections_align"/> 
-    <param name="align_image_topic" type="string" value="/detection_align/image_align" /> 
-    <param name="align_lidartag_detection_topic" type="string" value= "/detection_align/lidartag_detections_align"/>
-    <param name="alignment_msgs_topic" type="string" value = "/detection_align/tag_alignment"/>
-  </node>
 </launch>
