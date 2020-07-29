@@ -54,12 +54,14 @@ To compete the fron-end of the pipeline of the [automatic calibration](https://g
 -->
 2. Jiunn-Kai Huang and J. Grizzle, "Improvements to Target-Based 3D LiDAR to Camera Calibration" ([PDF](https://github.com/UMich-BipedLab/extrinsic_lidar_camera_calibration/blob/master/LiDAR2CameraCalibration.pdf))([arXiv](https://arxiv.org/abs/1910.03126))
 ```
-@article{huang2019improvements,
-  title={Improvements to Target-Based 3D LiDAR to Camera Calibration},
-  author={Huang, Jiunn-Kai and Grizzle, Jessy W},
-  journal={arXiv preprint arXiv:1910.03126},
-  year={2019}
-}
+@article{huang2020improvements,
+  author={J. {Huang} and J. W. {Grizzle}},
+  journal={IEEE Access}, 
+  title={Improvements to Target-Based 3D LiDAR to Camera Calibration}, 
+  year={2020},
+  volume={8},
+  number={},
+  pages={134101-134110},}
 ```
 3. Jiunn-Kai Huang, Maani Ghaffari, Ross Hartley, Lu Gan, Ryan M. Eustice,
 and Jessy W. Grizzle, "LiDARTag: A Real-Time Fiducial Tag using
