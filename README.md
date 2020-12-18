@@ -41,17 +41,16 @@ This package contains three launch files.
 To compete the fron-end of the pipeline of the [automatic calibration](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration), the _sync_cam_lidar_ launch file should be ran first, and then run the _alignment_node_only_ launch file to run the tag pairing node. 
 
 ## Citations
-1. Jiunn-Kai Huang, Chenxi Feng, Madhav Achar, Maani Ghaffari, and Jessy W. Grizzle, "3D LiDAR Intrinsic Calibration and Automatic System for LiDAR to Camera Calibration" ([PDF](https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration/blob/release_v1/AutomaticCalibration.pdf))(arXiv will appear soon))
-<!--
+1. Jiunn-Kai Huang, Chenxi Feng, Madhav Achar, Maani Ghaffari, and Jessy W. Grizzle, "Global Unifying Intrinsic Calibration for Spinning and Solid-State LiDARs" ([arXiv](https://arxiv.org/abs/2012.03321))
+
 ```
-@article{huang2019improvements,
-  title={Improvements to Target-Based 3D LiDAR to Camera Calibration},
-  author={Huang, Jiunn-Kai and Grizzle, Jessy W},
-  journal={arXiv preprint arXiv:1910.03126},
-  year={2019}
+@article{huang2020global,
+  title={Global Unifying Intrinsic Calibration for Spinning and Solid-State LiDARs},
+  author={Huang, Jiunn-Kai and Feng, Chenxi and Achar, Madhav and Ghaffari, Maani and Grizzle, Jessy W},
+  journal={arXiv preprint arXiv:2012.03321},
+  year={2020}
 }
 ```
--->
 2. Jiunn-Kai Huang and J. Grizzle, "Improvements to Target-Based 3D LiDAR to Camera Calibration" ([PDF](https://github.com/UMich-BipedLab/extrinsic_lidar_camera_calibration/blob/master/LiDAR2CameraCalibration.pdf))([arXiv](https://arxiv.org/abs/1910.03126))
 ```
 @article{huang2020improvements,
